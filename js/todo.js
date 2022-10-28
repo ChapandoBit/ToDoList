@@ -42,7 +42,7 @@ inputTaskEl.addEventListener("keypress", (e) => {
 //functions
 const newTask = () => {
   const task = new Task(inputTaskEl.value, taskIdCounter);
-  inputTaskEl.value = null;
+  //inputTaskEl.value = null;
   taskList.push(task);
 
   const htmlToInsert = `
@@ -50,13 +50,20 @@ const newTask = () => {
         class="task-container" 
         id="${taskIdCounter}-${taskList.length - 1}-task-container"
         >
-          <span>${task.description}</span> 
+        
+          <label class="task-label-checkbox">
 
-          <input 
-          class="task-completed-checkbox" 
-          type="checkbox" 
-          id="${taskIdCounter}-${taskList.length - 1}-task-completed-checkbox"
-          ></input>
+            <input 
+            class="task-completed-checkbox" 
+            type="checkbox" 
+            id="${taskIdCounter}-${taskList.length - 1}-task-completed-checkbox"
+            ></input>
+
+            <span class="task-checkmark-checkbox"></span>
+
+          </label>
+
+          <span class="task-description">${task.description}</span> 
 
           <button 
           class="task-delete-btn"
@@ -94,3 +101,13 @@ const newTask = () => {
 
   taskIdCounter++;
 };
+
+
+
+newTask();
+newTask();
+newTask();
+newTask();
+newTask();
+newTask();
+newTask();
