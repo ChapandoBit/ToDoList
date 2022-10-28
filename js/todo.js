@@ -42,7 +42,7 @@ inputTaskEl.addEventListener("keypress", (e) => {
 //functions
 const newTask = () => {
   const task = new Task(inputTaskEl.value, taskIdCounter);
-  //inputTaskEl.value = null;
+  inputTaskEl.value = null;
   taskList.push(task);
 
   const htmlToInsert = `
@@ -68,7 +68,7 @@ const newTask = () => {
           <button 
           class="task-delete-btn"
           id="${taskIdCounter}-${taskList.length - 1}-task-delete-btn"
-          >X</button>
+          ><i class="fa-solid fa-trash-can"></i></button>
 
           <br/>
         </div>
@@ -102,12 +102,13 @@ const newTask = () => {
   taskIdCounter++;
 };
 
+// For debug purpose
+const DEBUG_CREATE_NEW_TASK = (s) => {
+  inputTaskEl.value = s;
+  newTask();
+}
 
-
-newTask();
-newTask();
-newTask();
-newTask();
-newTask();
-newTask();
-newTask();
+DEBUG_CREATE_NEW_TASK("Build components");
+DEBUG_CREATE_NEW_TASK("CSS padding outside box");
+DEBUG_CREATE_NEW_TASK("Database instance");
+DEBUG_CREATE_NEW_TASK("Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quas laboriosam, doloribus totam nihil ipsa sed nam inventore reiciendis itaque animi, ullam est vel voluptatem, sapiente excepturi cum temporibus architecto!");
