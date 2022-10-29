@@ -4,27 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="css/style.css">
-    <title>Todo list</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <div id="head-root"></div>
   </head>
   <body>
-    <div class="general-container">
-      <div id="header-todo">
-        <h1>TODO</h1>
-        <span>v0.1</span>
-      </div>
-      <div class="container-todo">
-        <input
-          type="text"
-          id="input-task-description"
-          name="input-task-description"
-          placeholder="Enter new task"
-        />
-        <div class="container-task-list" id="container-task-list"></div>
-      </div>
-    </div>
-    <footer>By ChapandoBit</footer>
-    <script src="js/todo.js"></script>
+    <div id="root"></div>
+    <script src="index.js" type="module"></script>
+    <div id="script-root"></div>
   </body>
 </html>
