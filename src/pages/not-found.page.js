@@ -6,8 +6,6 @@ export default () => {
   const main = document.createElement("div");
   const script = notFoundScript;
 
-  document.title = "Page Not Found";
-
   main.innerHTML = `
     ${navbarComponent()}
     <h1>404 Page not found</h1>
