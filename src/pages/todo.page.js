@@ -1,5 +1,5 @@
 import { ChapandoElement } from "../js/interface/chapando-element.interface.js";
-import todoScript from "../js/todo-script.js";
+import todoScript from "../js/todo.script.js";
 import navbarComponent from "./components/navbar.component.js";
 
 export default () => {

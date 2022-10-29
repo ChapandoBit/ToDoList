@@ -24,60 +24,58 @@ export default () => {
     inputTaskEl.value = null;
     taskList.push(task);
 
-    const htmlToInsert = `
-        <div 
-        class="task-container" 
-        id="${taskIdCounter}-${taskList.length - 1}-task-container"
-        >
-        
-          <label class="task-label-checkbox">
-
-            <input 
-            class="task-completed-checkbox" 
-            type="checkbox" 
-            id="${taskIdCounter}-${taskList.length - 1}-task-completed-checkbox"
-            ></input>
-
-            <span class="task-checkmark-checkbox"></span>
-
-          </label>
-
-          <span class="task-description">${task.description}</span> 
-
-          <button 
-          class="task-delete-btn"
-          id="${taskIdCounter}-${taskList.length - 1}-task-delete-btn"
-          ><i class="fa-solid fa-trash-can"></i></button>
-
-          <br/>
-        </div>
+    const newTask = document.createElement("div");
+    newTask.className = "task-container";
+    newTask.id = `${taskIdCounter}-task-container`;
+    newTask.innerHTML = `
+      <label class="task-label-checkbox">
+        <input 
+        class="task-completed-checkbox" 
+        type="checkbox" 
+        id="${taskIdCounter}-task-completed-checkbox"
+        ></input>
+        <span class="task-checkmark-checkbox"></span>
+      </label>
+      <span class="task-description">${task.description}</span> 
+      <button 
+      class="task-delete-btn"
+      id="${taskIdCounter}-task-delete-btn"
+      >
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
     `;
 
-    taskListEl.insertAdjacentHTML("beforeend", htmlToInsert);
+    taskListEl.append(newTask);
     let taskCheckbox = document.getElementById(
-      `${taskIdCounter}-${taskList.length - 1}-task-completed-checkbox`
+      `${taskIdCounter}-task-completed-checkbox`
     );
     let taskDeleteBtn = document.getElementById(
-      `${taskIdCounter}-${taskList.length - 1}-task-delete-btn`
+      `${taskIdCounter}-task-delete-btn`
     );
     taskCheckbox.addEventListener("change", (e) => {
-      const id = e.target.id.split("-")[0];
-      const arrayPos = e.target.id.split("-")[1];
+      const id = parseInt(e.target.id.split("-")[0]);
+      let taskArrayPos;
+      for (let i = 0; i < taskList.length; i++) {
+        if (taskList[i].id === id) {
+          taskArrayPos = i;
+          break;
+        }
+      }
       if (e.target.checked) {
-        taskList[arrayPos].finish();
+        taskList[taskArrayPos].finish();
       } else {
-        taskList[arrayPos].restart();
+        taskList[taskArrayPos].restart();
       }
     });
     taskDeleteBtn.addEventListener("click", (e) => {
       const id = e.target.id.split("-")[0];
-      const arrayPos = e.target.id.split("-")[1];
       taskList = taskList.filter((task) => {
         return task.id !== parseInt(id);
       });
-      document.getElementById(`${id}-${arrayPos}-task-container`).remove();
+      document.getElementById(`${id}-task-container`).remove();
     });
 
+    console.log(taskList);
     taskIdCounter++;
   };
 
