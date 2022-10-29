@@ -9,14 +9,50 @@ export default () => {
   let taskList = [];
   let taskIdCounter = 0;
 
-  //listeners
-  inputTaskEl.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      if (inputTaskEl.value === "" || inputTaskEl.value.startsWith(" ")) return;
-      e.preventDefault();
-      newTask();
-    }
-  });
+  //variables edit mode
+  let editMode = false;
+  let taskToBeEditedId;
+
+  const enterEditMode = () => {
+    const taskText = document.getElementById(
+      `${taskToBeEditedId}-task-description-text`
+    );
+    document.getElementById(`${taskToBeEditedId}-task-container`).className =
+      "task-container editing";
+
+    inputTaskEl.value = taskText.innerText;
+    taskText.className = "task-description-text editing";
+
+    inputTaskEl.focus();
+    editMode = true;
+  };
+
+  const finishEditMode = () => {
+    const taskText = document.getElementById(
+      `${taskToBeEditedId}-task-description-text`
+    );
+
+    document.getElementById(`${taskToBeEditedId}-task-container`).className =
+      "task-container";
+
+    taskText.className = "task-description-text";
+    taskText.innerText = inputTaskEl.value;
+
+    inputTaskEl.value = null;
+    editMode = false;
+  };
+
+  const cancelEditMode = () => {
+    document.getElementById(
+      `${taskToBeEditedId}-task-description-text`
+    ).className = "task-description-text";
+
+    document.getElementById(`${taskToBeEditedId}-task-container`).className =
+      "task-container";
+
+    inputTaskEl.value = null;
+    editMode = false;
+  };
 
   //functions
   const newTask = () => {
@@ -36,7 +72,14 @@ export default () => {
         ></input>
         <span class="task-checkmark-checkbox"></span>
       </label>
-      <span class="task-description">${task.description}</span> 
+      <div class ="task-description">
+        <span 
+        class="task-description-text"
+        id="${taskIdCounter}-task-description-text"
+        >
+        ${task.description}
+        </span> 
+      <div/>
       <button 
       class="task-delete-btn"
       id="${taskIdCounter}-task-delete-btn"
@@ -51,6 +94,9 @@ export default () => {
     );
     let taskDeleteBtn = document.getElementById(
       `${taskIdCounter}-task-delete-btn`
+    );
+    let taskDescSpan = document.getElementById(
+      `${taskIdCounter}-task-description-text`
     );
     taskCheckbox.addEventListener("change", (e) => {
       const id = parseInt(e.target.id.split("-")[0]);
@@ -74,9 +120,32 @@ export default () => {
       });
       document.getElementById(`${id}-task-container`).remove();
     });
+    taskDescSpan.addEventListener("click", (e) => {
+      taskToBeEditedId = parseInt(e.target.id.split("-")[0]);
+      enterEditMode();
+    });
 
     taskIdCounter++;
   };
+
+  //listeners
+  inputTaskEl.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      if (inputTaskEl.value === "" || inputTaskEl.value.startsWith(" ")) return;
+      e.preventDefault();
+      if (editMode) {
+        finishEditMode();
+      } else {
+        newTask();
+      }
+    }
+  });
+  inputTaskEl.addEventListener("focusout", (e) => {
+    e.preventDefault();
+    if (editMode) {
+      cancelEditMode();
+    }
+  });
 
   // For debug purpose
   const DEBUG_CREATE_NEW_TASK = (s) => {
