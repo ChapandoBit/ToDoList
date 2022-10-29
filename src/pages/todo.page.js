@@ -3,13 +3,10 @@ import todoScript from "../js/todo-script.js";
 import navbarComponent from "./components/navbar.component.js";
 
 export default () => {
-  const head = document.createElement("div");
   const main = document.createElement("div");
   const script = todoScript;
 
-  head.innerHTML = `
-    <title>To Do List</title> 
-  `;
+  document.title = "Todo App";
 
   main.innerHTML = `
     ${navbarComponent()}
@@ -31,5 +28,5 @@ export default () => {
     <footer>By ChapandoBit</footer>
   `;
 
-  return new ChapandoElement(head, main, script);
+  return new ChapandoElement(main, script);
 };

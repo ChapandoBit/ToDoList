@@ -1,10 +1,8 @@
 import routes from "./src/js/routes.js";
 
-const head = document.querySelector("#head-root");
 const main = document.querySelector("#root");
 
 const checkStarterRoute = () => {
-  head.innerHTML = "";
   main.innerHTML = "";
 
   let validatedRoute = routes().filter((route) => {
@@ -12,7 +10,6 @@ const checkStarterRoute = () => {
   })[0];
   if (typeof validatedRoute === "undefined") validatedRoute = routes()[0];
 
-  head.appendChild(validatedRoute.pageObject.head);
   main.appendChild(validatedRoute.pageObject.main);
   if (typeof validatedRoute.pageObject.script !== "object") {
     validatedRoute.pageObject.script();
@@ -27,7 +24,6 @@ const activateRouteChangeHandler = () => {
     })[0];
     if (typeof validatedRoute === "undefined") validatedRoute = routes()[0];
 
-    head.appendChild(validatedRoute.pageObject.head);
     main.appendChild(validatedRoute.pageObject.main);
     if (typeof validatedRoute.pageObject.script !== "object") {
       validatedRoute.pageObject.script();

@@ -1,10 +1,8 @@
 export class ChapandoElement {
-  head;
   main;
   script;
 
-  constructor(head, main, script) {
-    this.head = head;
+  constructor(main, script) {
     this.main = main;
     this.script = script;
   }
