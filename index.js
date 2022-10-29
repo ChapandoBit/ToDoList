@@ -10,6 +10,8 @@ const checkStarterRoute = () => {
   })[0];
   if (typeof validatedRoute === "undefined") validatedRoute = routes()[0];
 
+  console.log("Current Route: ", validatedRoute);
+
   main.appendChild(validatedRoute.pageObject.main);
   if (typeof validatedRoute.pageObject.script !== "object") {
     validatedRoute.pageObject.script();
@@ -24,6 +26,8 @@ const activateRouteChangeHandler = () => {
     })[0];
     if (typeof validatedRoute === "undefined") validatedRoute = routes()[0];
 
+    console.log("Current Route: ", validatedRoute);
+
     main.appendChild(validatedRoute.pageObject.main);
     if (typeof validatedRoute.pageObject.script !== "object") {
       validatedRoute.pageObject.script();
@@ -35,5 +39,3 @@ window.addEventListener("load", () => {
   checkStarterRoute();
   activateRouteChangeHandler();
 });
-
-console.log("inside index.js");

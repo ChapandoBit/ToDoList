@@ -75,7 +75,6 @@ export default () => {
       document.getElementById(`${id}-task-container`).remove();
     });
 
-    console.log(taskList);
     taskIdCounter++;
   };
 
@@ -91,6 +90,4 @@ export default () => {
   DEBUG_CREATE_NEW_TASK(
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quas laboriosam, doloribus totam nihil ipsa sed nam inventore reiciendis itaque animi, ullam est vel voluptatem, sapiente excepturi cum temporibus architecto!"
   );
-
-  console.log("inside todo script");
 };
