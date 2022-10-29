@@ -4,26 +4,25 @@ import navbarComponent from "./components/navbar.component.js";
 
 export default () => {
   const main = document.createElement("div");
+  main.className = "general-container";
   const script = todoScript;
 
   document.title = "Todo App";
 
   main.innerHTML = `
     ${navbarComponent()}
-    <div class="general-container">
-      <div id="header-todo">
-        <h1>TODO</h1>
-        <span>v0.1</span>
-      </div>
-      <div class="container-todo">
-        <input
-          type="text"
-          id="input-task-description"
-          name="input-task-description"
-          placeholder="Enter new task"
-        />
-        <div class="container-task-list" id="container-task-list"></div>
-      </div>
+    <div id="header-todo">
+      <h1>TODO</h1>
+      <span>v0.1</span>
+    </div>
+    <div class="container-todo">
+      <input
+        type="text"
+        id="input-task-description"
+        name="input-task-description"
+        placeholder="Enter new task"
+      />
+      <div class="container-task-list" id="container-task-list"></div>
     </div>
     <footer>By ChapandoBit</footer>
   `;
