@@ -1,7 +1,5 @@
 export default () => {
-  const container = document.createElement("div");
-
-  container.innerHTML = `
+  return `
     <nav>
       <a href="/#" class="nav-link">Home</a>
       <a href="/#todo" class="nav-link">Todo</a>
@@ -15,6 +13,4 @@ export default () => {
       <i class="fa-solid fa-moon" id="toggle-dark"></i>
     </label>
   `;
-
-  return container.innerHTML;
 };

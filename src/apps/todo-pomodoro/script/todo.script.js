@@ -1,4 +1,5 @@
-import { Task } from "./interface/task.interface.js";
+import { Task } from "../interface/task.interface.js";
+import pomodoroScript from "./pomodoro.script.js";
 
 export default () => {
   //elements
@@ -21,7 +22,7 @@ export default () => {
       "task-container editing";
 
     inputTaskEl.value = taskText.innerText;
-    taskText.className = "task-description-text editing";
+    taskText.className = "task-description-text js-editing";
 
     inputTaskEl.focus();
     editMode = true;
@@ -146,6 +147,8 @@ export default () => {
       cancelEditMode();
     }
   });
+
+  pomodoroScript();
 
   // For debug purpose
   const DEBUG_CREATE_NEW_TASK = (s) => {

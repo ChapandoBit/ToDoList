@@ -1,4 +1,8 @@
-import routes from "./src/js/routes.js";
+import { Pomodoro } from "./src/apps/todo-pomodoro/interface/pomodoro.interface.js";
+import routes from "./src/apps/router/routes.js";
+
+/*Globals*/
+window.pomodoro = new Pomodoro();
 
 const main = document.querySelector("#root");
 

@@ -1,6 +1,6 @@
-import homeScript from "../js/home.script.js";
-import { ChapandoElement } from "../js/interface/chapando-element.interface.js";
-import navbarComponent from "./components/navbar.component.js";
+import homeScript from "./script/home.script.js";
+import { ChapandoElement } from "../shared/interface/chapando-element.interface.js";
+import navbarComponent from "../shared/component/navbar.component.js";
 
 export default () => {
   const main = document.createElement("div");

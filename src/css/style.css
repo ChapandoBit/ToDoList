@@ -1,70 +1,88 @@
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
 
+/*
+	--Fix css card todo task
+
+	added buttons:
+	  pause/resume -> pomodoro.component.js
+	  pomodoro icon -> todo.page.js
+
+	css classes JS:
+	  js-invisible
+	  js-pause/js-resume -> icone pause/resume 
+*/
+
+.js-invisible {
+  visibility: hidden;
+  position: absolute;
+  top: -9999px;
+}
+
 :root {
-	--main-background: #646464;
-	--task-content-bg: #414141;
-	--dark-color-primary: #ffbb01;
+  --main-background: #646464;
+  --task-content-bg: #414141;
+  --dark-color-primary: #ffbb01;
 }
 
 /* Clear HTML */
 * {
-	border: 0;
-	margin: 0;
-	padding: 0;
-	font-family: "Inconsolata", monospace;
-	font-size: 18px;
-	box-sizing: border-box;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  font-family: "Inconsolata", monospace;
+  font-size: 18px;
+  box-sizing: border-box;
 }
 
 *:focus {
-	outline: none;
+  outline: none;
 }
 /*(E) Clear HTML */
 
 html {
-	height: 100%;
+  height: 100%;
 }
 
 body {
-	background: var(--main-background);
-	color: #fff;
-	height: 100%;
-	display: flex;
-	flex-direction: column;
+  background: var(--main-background);
+  color: #fff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 footer {
-	max-width: 640px;
-	margin: 0 auto;
-	padding: 20px 10px;
-	color: #414141;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 10px;
+  color: #414141;
 }
 
 .general-container {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Header */
 #header-todo {
-	min-width: 640px;
-	max-width: 640px;
-	margin: 0 auto;
-	padding: 30px 10px 0px 10px;
-	display: flex;
-	flex-direction: row;
+  min-width: 640px;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 30px 10px 0px 10px;
+  display: flex;
+  flex-direction: row;
 }
 
 #header-todo > h1 {
-	font-size: 48px;
-	text-align: left;
-	letter-spacing: 10px;
-	text-shadow: 4px 4px 0px #1a1a1a;
+  font-size: 48px;
+  text-align: left;
+  letter-spacing: 10px;
+  text-shadow: 4px 4px 0px #1a1a1a;
 }
 
 #header-todo > span {
-	align-self: flex-end;
-	color: #414141;
+  align-self: flex-end;
+  color: #414141;
 }
 
 /*
@@ -80,21 +98,21 @@ footer {
 
 /* Content */
 .container-todo {
-	min-width: 640px;
-	max-width: 640px;
-	margin: 0px auto;
-	padding: 10px;
-	height: 100%;
+  min-width: 640px;
+  max-width: 640px;
+  margin: 0px auto;
+  padding: 10px;
+  height: 100%;
 }
 
 #input-task-description {
-	padding: 5px;
-	border-radius: 3px;
-	font-size: 24px;
-	padding: 5px 10px;
-	width: 100%;
-	box-shadow: 4px 4px #1a1a1a;
-	border: 2px solid #1a1a1a;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 24px;
+  padding: 5px 10px;
+  width: 100%;
+  box-shadow: 4px 4px #1a1a1a;
+  border: 2px solid #1a1a1a;
 }
 
 /*List*/
@@ -103,179 +121,178 @@ footer {
 		List item Checkmark
 =========================================*/
 .task-label-checkbox {
-	float: left;
-	background-color: #5c5c5c;
-	margin: auto;
-	padding: 10px;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	position: relative;
-	border-radius: 5px;
+  float: left;
+  background-color: #5c5c5c;
+  margin: auto;
+  padding: 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  border-radius: 5px;
 }
 
 /* Hide checkbox */
 .task-label-checkbox input {
-	opacity: 0;
-	width: 0;
-	height: 0;
-	position: absolute;
-	left: 0;
-	top: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .task-checkmark-checkbox {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 .task-label-checkbox:hover input ~ .task-checkmark-checkbox {
-	background-color: #ccc;
-	border-radius: inherit;
+  background-color: #ccc;
+  border-radius: inherit;
 }
 
 .task-label-checkbox input:checked ~ .task-checkmark-checkbox {
-	background-color: #ffd901;
-	border-radius: inherit;
+  background-color: #ffd901;
+  border-radius: inherit;
 }
 
 /* Text decoration */
 .task-label-checkbox:has(input:checked) ~ .task-description {
-	text-decoration: line-through;
-	opacity: 0.5;
+  text-decoration: line-through;
+  opacity: 0.5;
 }
 
 .task-checkmark-checkbox:after {
-	content: "";
-	position: absolute;
-	display: none;
+  content: "";
+  position: absolute;
+  display: none;
 }
 
 .task-label-checkbox input:checked ~ .task-checkmark-checkbox:after {
-	display: block;
+  display: block;
 }
 
 /* Icon mark */
 .task-label-checkbox .task-checkmark-checkbox:after {
-	left: 6px;
-	top: 3px;
-	width: 5px;
-	height: 10px;
-	border: solid white;
-	border-width: 0 3px 3px 0;
-	-webkit-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	transform: rotate(45deg);
+  left: 6px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 /* =================================================================== */
 
 #container-task-list {
-	padding-top: 10px;
-	width: 100%;
+  padding-top: 10px;
+  width: 100%;
 }
 
 .task-container {
-	margin-bottom: 8px;
-	padding: 5px;
-	background-color: var(--task-content-bg);
-	border-radius: 3px;
-	box-shadow: 4px 4px #1a1a1a;
-	border: 2px solid #1a1a1a;
-	display: flex;
-	animation-duration: 0.75s;
-	animation-name: slideInTaskContainer;
+  margin-bottom: 8px;
+  padding: 5px;
+  background-color: var(--task-content-bg);
+  border-radius: 3px;
+  box-shadow: 4px 4px #1a1a1a;
+  border: 2px solid #1a1a1a;
+  display: flex;
+  animation-duration: 0.75s;
+  animation-name: slideInTaskContainer;
 }
 
 .task-container > span {
-	width: 100%;
-	font-size: 24px;
-	vertical-align: middle;
-	margin-left: 10px;
-	word-break: break-all;
+  width: 100%;
+  font-size: 24px;
+  vertical-align: middle;
+  margin-left: 10px;
+  word-break: break-all;
 }
 
 .task-delete-btn {
-	background-color: rgba(0, 0, 0, 0);
-	width: 24px;
-	height: 24px;
-	float: right;
-	border-radius: 5px;
-	margin: auto;
-	filter: invert(100%);
+  background-color: rgba(0, 0, 0, 0);
+  width: 24px;
+  height: 24px;
+  float: right;
+  border-radius: 5px;
+  margin: auto;
+  filter: invert(100%);
 }
 
 .task-delete-btn:hover {
-	color: var(--dark-color-primary);
-	cursor: pointer;
-	filter: invert(0%);
+  color: var(--dark-color-primary);
+  cursor: pointer;
+  filter: invert(0%);
 }
 
 .task-delete-btn > i {
-	pointer-events: none;
+  pointer-events: none;
 }
 
 /* === TOGGLE COLOR MODE === */
 .toggle-color-mode > input {
-	position: absolute;
-	left: 0;
-	right: 0;
-	width: 0;
-	height: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 0;
+  height: 0;
 }
 
 .toggle-color-mode {
-	padding: 6px;
-	background-color: var(--task-content-bg);
-	max-width: 70px;
-	height: 32px;
-	border-radius: 30px;
-	position: relative;
-	box-shadow: inset 0px 0 5px #000;
+  padding: 6px;
+  background-color: var(--task-content-bg);
+  max-width: 70px;
+  height: 32px;
+  border-radius: 30px;
+  position: relative;
+  box-shadow: inset 0px 0 5px #000;
 }
 
 .toggle-color-mode:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .toggle-color-mode > span {
-	content: "";
-	position: absolute;
-	left: 4px;
-	top: 4px;
-	border-radius: 100%;
-	background-color: var(--main-background);
-	width: 24px;
-	height: 24px;
-	animation-name: slideToggleLeft;
-	animation-duration: 0.3s;
-	animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  border-radius: 100%;
+  background-color: var(--main-background);
+  width: 24px;
+  height: 24px;
+  animation-name: slideToggleLeft;
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .toggle-color-mode:has(input:checked) span {
-	left: 42px;
-	animation-name: slideToggleRight;
-	animation-duration: 0.3s;
-	animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+  left: 42px;
+  animation-name: slideToggleRight;
+  animation-duration: 0.3s;
+  animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .fa-sun {
-	color: var(--dark-color-primary);
+  color: var(--dark-color-primary);
 }
 
 .fa-moon {
-	color: #ad1a9a;
+  color: #ad1a9a;
 }
 
 .toggle-color-mode > #toggle-dark {
-	float: right;
-	margin-right: 4px;
+  float: right;
+  margin-right: 4px;
 }
-
 
 /*=======================================
 		Keyframes animations
@@ -283,23 +300,31 @@ footer {
 
 /* Toggle animation */
 @keyframes slideToggleLeft {
-	from { left: 42px; }
-	to { left: 4px; }
+  from {
+    left: 42px;
+  }
+  to {
+    left: 4px;
+  }
 }
 @keyframes slideToggleRight {
-	from { left: 4px; }
-	to { left: 42px; }
+  from {
+    left: 4px;
+  }
+  to {
+    left: 42px;
+  }
 }
 
 @keyframes slideInTaskContainer {
-	from {
-		opacity: 0;
-		margin-left: -100%;
-		width: 100%;
-	}
+  from {
+    opacity: 0;
+    margin-left: -100%;
+    width: 100%;
+  }
 
-	to {
-		margin-left: 0%;
-		width: 100%;
-	}
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
 }
