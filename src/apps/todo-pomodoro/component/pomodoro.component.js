@@ -3,17 +3,17 @@ export default () => {
     <div id ="pomodoro-container" class="js-invisible">
       <label>
           focus
-          <input type="text" placeholder="${window.pomodoro.focus}"></input>
+          <input id="pomodoro-focus-input" type="number" value="${window.pomodoro.focus}"></input>
       </label>
       <br/>
       <label>
           shortBreak
-          <input type="text" placeholder="${window.pomodoro.shortBreak}"></input>
+          <input id="pomodoro-shortbreak-input" type="number" value="${window.pomodoro.shortBreak}"></input>
       </label>
       <br/>
       <label>
           longBreak
-          <input type="text" placeholder="${window.pomodoro.longBreak}"></input>
+          <input id="pomodoro-longbreak-input" type="number" value="${window.pomodoro.longBreak}"></input>
       </label>
       <br/>
       <button id="pomodoro-pause-resume-btn" class="js-${window.pomodoro.status}">
@@ -23,6 +23,8 @@ export default () => {
       </button>
       <br/>
       <button id="pomodoro-save-btn">save</button>
+      <br/>
+      <button id="pomodoro-reset-btn">reset</button>
     </div>
   `;
 };

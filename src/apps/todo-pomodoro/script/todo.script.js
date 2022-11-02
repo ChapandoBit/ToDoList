@@ -3,8 +3,8 @@ import pomodoroScript from "./pomodoro.script.js";
 
 export default () => {
   //elements
-  const inputTaskEl = document.getElementById("input-task-description");
-  const taskListEl = document.getElementById("container-task-list");
+  const inputTaskEl = document.querySelector("#input-task-description");
+  const taskListEl = document.querySelector("#container-task-list");
 
   //variables
   let taskList = [];
@@ -12,7 +12,7 @@ export default () => {
 
   //variables edit mode
   let editMode = false;
-  let taskToBeEditedId;
+  let taskToBeEditedId = null;
 
   const enterEditMode = () => {
     const taskText = document.getElementById(
@@ -41,6 +41,7 @@ export default () => {
 
     inputTaskEl.value = null;
     editMode = false;
+    taskToBeEditedId = null;
   };
 
   const cancelEditMode = () => {
@@ -53,6 +54,7 @@ export default () => {
 
     inputTaskEl.value = null;
     editMode = false;
+    taskToBeEditedId = null;
   };
 
   //functions
@@ -61,45 +63,21 @@ export default () => {
     inputTaskEl.value = null;
     taskList.push(task);
 
-    const newTask = document.createElement("div");
-    newTask.className = "task-container";
-    newTask.id = `${taskIdCounter}-task-container`;
-    newTask.innerHTML = `
-      <label class="task-label-checkbox">
-        <input 
-        class="task-completed-checkbox" 
-        type="checkbox" 
-        id="${taskIdCounter}-task-completed-checkbox"
-        ></input>
-        <span class="task-checkmark-checkbox"></span>
-      </label>
-      <div class ="task-description">
-        <span 
-        class="task-description-text"
-        id="${taskIdCounter}-task-description-text"
-        >
-        ${task.description}
-        </span> 
-      <div/>
-      <button 
-      class="task-delete-btn"
-      id="${taskIdCounter}-task-delete-btn"
-      >
-        <i class="fa-solid fa-trash-can"></i>
-      </button>
-    `;
+    const taskEl = document.createElement("div");
+    taskEl.className = "task-container";
+    taskEl.id = `${taskIdCounter}-task-container`;
 
-    taskListEl.append(newTask);
-    let taskCheckbox = document.getElementById(
-      `${taskIdCounter}-task-completed-checkbox`
-    );
-    let taskDeleteBtn = document.getElementById(
-      `${taskIdCounter}-task-delete-btn`
-    );
-    let taskDescSpan = document.getElementById(
-      `${taskIdCounter}-task-description-text`
-    );
-    taskCheckbox.addEventListener("change", (e) => {
+    const checkboxEl = document.createElement("label");
+    checkboxEl.className = "task-label-checkbox";
+    checkboxEl.innerHTML = `
+      <input 
+      class="task-completed-checkbox" 
+      type="checkbox" 
+      id="${taskIdCounter}-task-completed-checkbox"
+      ></input>
+      <span class="task-checkmark-checkbox"></span>
+    `;
+    checkboxEl.addEventListener("change", (e) => {
       const id = parseInt(e.target.id.split("-")[0]);
       let taskArrayPos;
       for (let i = 0; i < taskList.length; i++) {
@@ -114,17 +92,44 @@ export default () => {
         taskList[taskArrayPos].restart();
       }
     });
-    taskDeleteBtn.addEventListener("click", (e) => {
+
+    const descriptionEl = document.createElement("div");
+    descriptionEl.className = "task-description";
+    descriptionEl.innerHTML = `
+      <span 
+      class="task-description-text"
+      id="${taskIdCounter}-task-description-text"
+      >
+        ${task.description}
+      </span> 
+    `;
+    descriptionEl.addEventListener("click", (e) => {
+      const taskId = parseInt(e.target.id.split("-")[0]);
+      if (taskToBeEditedId !== taskId) {
+        taskToBeEditedId = taskId;
+        enterEditMode();
+      }
+    });
+
+    const deleteBtnEl = document.createElement("button");
+    deleteBtnEl.className = "task-delete-btn";
+    deleteBtnEl.id = `${taskIdCounter}-task-delete-btn`;
+    deleteBtnEl.innerHTML = `
+      <i class="fa-solid fa-trash-can"></i>
+    `;
+    deleteBtnEl.addEventListener("click", (e) => {
       const id = e.target.id.split("-")[0];
       taskList = taskList.filter((task) => {
         return task.id !== parseInt(id);
       });
       document.getElementById(`${id}-task-container`).remove();
     });
-    taskDescSpan.addEventListener("click", (e) => {
-      taskToBeEditedId = parseInt(e.target.id.split("-")[0]);
-      enterEditMode();
-    });
+
+    taskEl.appendChild(checkboxEl);
+    taskEl.appendChild(descriptionEl);
+    taskEl.appendChild(deleteBtnEl);
+
+    taskListEl.append(taskEl);
 
     taskIdCounter++;
   };
