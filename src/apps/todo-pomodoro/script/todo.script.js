@@ -75,6 +75,8 @@ export default () => {
       id="${taskIdCounter}-task-completed-checkbox"
       ></input>
       <span class="task-checkmark-checkbox"></span>
+      <i class="fa-solid fa-square-check fa-lg"></i>
+      <i class="fa-solid fa-square fa-lg"></i>
     `;
     checkboxEl.addEventListener("change", (e) => {
       const id = parseInt(e.target.id.split("-")[0]);

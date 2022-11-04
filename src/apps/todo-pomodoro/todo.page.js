@@ -14,8 +14,9 @@ export default () => {
     ${navbarComponent()}
     <div id="content-container">
       <div id="header-todo">
-        <h1>TODO</h1>
-        <span>v0.1</span>
+        <div id="header-todo-title">
+          <h1>TODO</h1>
+        </div>
         <button id="pomodoro-btn">
           pomodoro
           <i class="fa-solid fa-clock"></i>
