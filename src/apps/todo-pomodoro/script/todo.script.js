@@ -4,7 +4,7 @@ import pomodoroScript from "./pomodoro.script.js";
 export default () => {
   //elements
   const inputTaskEl = document.querySelector("#input-task-description");
-  const taskListEl = document.querySelector("#container-task-list");
+  const taskListEl = document.querySelector("#task-list-container");
 
   //variables
   let taskList = [];
@@ -16,13 +16,13 @@ export default () => {
 
   const enterEditMode = () => {
     const taskText = document.getElementById(
-      `${taskToBeEditedId}-task-description-text`
+      `${taskToBeEditedId}-task-description`
     );
-    document.getElementById(`${taskToBeEditedId}-task-container`).className =
-      "task-container editing";
+    document.getElementById(`${taskToBeEditedId}-task-card`).className =
+      "task-card editing";
 
     inputTaskEl.value = taskText.innerText;
-    taskText.className = "task-description-text js-editing";
+    taskText.className = "task-description js-editing";
 
     inputTaskEl.focus();
     editMode = true;
@@ -30,13 +30,13 @@ export default () => {
 
   const finishEditMode = () => {
     const taskText = document.getElementById(
-      `${taskToBeEditedId}-task-description-text`
+      `${taskToBeEditedId}-task-description`
     );
 
-    document.getElementById(`${taskToBeEditedId}-task-container`).className =
-      "task-container";
+    document.getElementById(`${taskToBeEditedId}-task-card`).className =
+      "task-card";
 
-    taskText.className = "task-description-text";
+    taskText.className = "task-description";
     taskText.innerText = inputTaskEl.value;
 
     inputTaskEl.value = null;
@@ -45,12 +45,11 @@ export default () => {
   };
 
   const cancelEditMode = () => {
-    document.getElementById(
-      `${taskToBeEditedId}-task-description-text`
-    ).className = "task-description-text";
+    document.getElementById(`${taskToBeEditedId}-task-description`).className =
+      "task-description";
 
-    document.getElementById(`${taskToBeEditedId}-task-container`).className =
-      "task-container";
+    document.getElementById(`${taskToBeEditedId}-task-card`).className =
+      "task-card";
 
     inputTaskEl.value = null;
     editMode = false;
@@ -64,8 +63,8 @@ export default () => {
     taskList.push(task);
 
     const taskEl = document.createElement("div");
-    taskEl.className = "task-container";
-    taskEl.id = `${taskIdCounter}-task-container`;
+    taskEl.className = "task-card";
+    taskEl.id = `${taskIdCounter}-task-card`;
 
     const checkboxEl = document.createElement("label");
     checkboxEl.className = "task-label-checkbox";
@@ -94,14 +93,10 @@ export default () => {
     });
 
     const descriptionEl = document.createElement("div");
+    descriptionEl.id = `${taskIdCounter}-task-description`;
     descriptionEl.className = "task-description";
     descriptionEl.innerHTML = `
-      <span 
-      class="task-description-text"
-      id="${taskIdCounter}-task-description-text"
-      >
         ${task.description}
-      </span> 
     `;
     descriptionEl.addEventListener("click", (e) => {
       const taskId = parseInt(e.target.id.split("-")[0]);
@@ -122,7 +117,7 @@ export default () => {
       taskList = taskList.filter((task) => {
         return task.id !== parseInt(id);
       });
-      document.getElementById(`${id}-task-container`).remove();
+      document.getElementById(`${id}-task-card`).remove();
     });
 
     taskEl.appendChild(checkboxEl);

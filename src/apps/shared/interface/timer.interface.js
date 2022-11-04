@@ -4,7 +4,7 @@ export class Timer {
 
   finished = false;
 
-  tickSec = () => {
+  tick = () => {
     this.sec -= 1;
     if (this.sec <= 0) {
       this.sec = 59;
@@ -16,12 +16,17 @@ export class Timer {
     }
   };
 
-  stringify = () => {
-    return `${this.min}:${this.sec === 0 ? "00" : this.sec}`;
+  restart = (min, sec) => {
+    this.min = min;
+    this.sec = sec;
   };
 
-  constructor(sec, min) {
-    this.sec = sec;
+  stringify = () => {
+    return `${this.min}:${this.sec < 10 ? `0${this.sec}` : this.sec}`;
+  };
+
+  constructor(min, sec) {
     this.min = min;
+    this.sec = sec;
   }
 }
