@@ -1,10 +1,11 @@
-import { Pomodoro } from "./src/apps/todo-pomodoro/interface/pomodoro.interface.js";
 import routes from "./src/apps/router/routes.js";
+import { Pomodoro } from "./src/apps/todo-pomodoro/interface/pomodoro.interface.js";
 
 /*Globals*/
 window.pomodoro = new Pomodoro();
 
 const main = document.querySelector("#root");
+let currentRoute = null;
 
 const checkStarterRoute = () => {
   main.innerHTML = "";
@@ -16,15 +17,20 @@ const checkStarterRoute = () => {
 
   console.log("Current Route: ", validatedRoute);
 
+  validatedRoute.pageObject.script.onStart();
   main.appendChild(validatedRoute.pageObject.main);
-  if (typeof validatedRoute.pageObject.script !== "object") {
-    validatedRoute.pageObject.script();
-  }
+  validatedRoute.pageObject.script.main();
+  currentRoute = validatedRoute;
 };
 
 const activateRouteChangeHandler = () => {
   window.addEventListener("hashchange", () => {
+    if (currentRoute !== null) {
+      currentRoute.script?.onEnd();
+      currentRoute = null;
+    }
     main.innerHTML = "";
+
     let validatedRoute = routes().filter((route) => {
       return route.name === window.location.hash.slice(1);
     })[0];
@@ -32,10 +38,10 @@ const activateRouteChangeHandler = () => {
 
     console.log("Current Route: ", validatedRoute);
 
+    validatedRoute.pageObject.script.onStart();
     main.appendChild(validatedRoute.pageObject.main);
-    if (typeof validatedRoute.pageObject.script !== "object") {
-      validatedRoute.pageObject.script();
-    }
+    validatedRoute.pageObject.script.main();
+    currentRoute = validatedRoute;
   });
 };
 

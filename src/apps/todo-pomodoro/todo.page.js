@@ -1,7 +1,7 @@
 import navbarComponent from "../shared/component/navbar.component.js";
 import { ChapandoElement } from "../shared/interface/chapando-element.interface.js";
 import pomodoroPopupComponent from "./component/pomodoro.component.js";
-import todoScript from "./script/todo.script.js";
+import { todoScript } from "./script/todo.script.js";
 
 export default () => {
   const main = document.createElement("div");

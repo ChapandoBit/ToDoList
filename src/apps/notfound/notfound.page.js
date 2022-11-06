@@ -1,6 +1,6 @@
-import { ChapandoElement } from "../shared/interface/chapando-element.interface.js";
-import notFoundScript from "../notfound/script/notfound.script.js";
 import navbarComponent from "../shared/component/navbar.component.js";
+import { ChapandoElement } from "../shared/interface/chapando-element.interface.js";
+import { notFoundScript } from "./script/notfound.script.js";
 
 export default () => {
   const main = document.createElement("div");
