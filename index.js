@@ -1,8 +1,15 @@
 import routes from "./src/apps/router/routes.js";
 import { Pomodoro } from "./src/apps/todo-pomodoro/interface/pomodoro.interface.js";
+import { Task } from "./src/apps/todo-pomodoro/interface/task.interface.js";
 
 /*Globals*/
 window.pomodoro = new Pomodoro();
+window.todo = [
+  new Task("a", 0),
+  new Task("b", 1),
+  new Task("c", 2),
+  new Task("d", 3),
+];
 
 const main = document.querySelector("#root");
 let currentRoute = null;
