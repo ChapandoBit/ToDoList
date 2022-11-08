@@ -17,11 +17,11 @@ export default () => {
         <div id="header-todo-title">
           <h1>TODO</h1>
         </div>
-        <button id="pomodoro-btn">
-          pomodoro
-          <i class="fa-solid fa-clock"></i>
+        <button id="pomodoro-btn" class="btn-clear btn-settings btn-pomodoro">
+          <i class="fa-solid fa-clock fa-lg"></i>
+          <span id="pomodoro-counter">${window.pomodoro.stringify()}</span>
         </button>
-        <span id="pomodoro-counter">${window.pomodoro.stringify()}</span>
+        
       </div>
       <div id="body-todo">
         <input
