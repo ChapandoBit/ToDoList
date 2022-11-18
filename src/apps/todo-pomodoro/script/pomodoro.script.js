@@ -28,18 +28,11 @@ export const pomodoroScript = new Script(
       .querySelector("#pomodoro-pause-resume-btn")
       .addEventListener("click", (e) => {
         e.preventDefault();
-        clearInterval(window.pomodoro.interval);
 
         if (window.pomodoro.status === "pause") {
-          window.pomodoro.status = "resume";
-          window.pomodoro.interval = setInterval(() => {
-            window.pomodoro.timeRemaining.setSeconds(
-              window.pomodoro.timeRemaining.getSeconds() - 1
-            );
-            window.pomodoro.intervalCallback();
-          }, 1000);
+          window.pomodoro.startActivity();
         } else if (window.pomodoro.status === "resume") {
-          window.pomodoro.status = "pause";
+          window.pomodoro.pauseActivity();
         }
       });
 

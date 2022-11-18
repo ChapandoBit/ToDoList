@@ -16,13 +16,41 @@ export class Pomodoro {
   intervalCallback;
   timeRemaining;
 
-  nextActivity = () => {
-    this.activityIterator++;
+  startActivity = () => {
+    this.status = "resume";
+    this.interval = setInterval(() => {
+      this.tick();
+    }, 1000)
+  }
 
-    if (this.activityIterator >= activitiesSequence.length) {
-      this.activityIterator = 0;
+  pauseActivity = () => {
+    clearInterval(this.interval);
+    this.status = "pause";
+  }
+
+  resetCurrentActivityDuration = () => {
+    this.timeRemaining = new Date(this.getCurrentActivityDuration() * 60000);
+  }
+
+  nextActivity = () => {
+    if(this.status !== 'pause'){
+      clearInterval(this.interval);
+      this.activityIterator++;
+
+      if (this.activityIterator >= activitiesSequence.length) {
+        this.activityIterator = 0;
+      }
+      this.resetCurrentActivityDuration();
+      this.startActivity();
     }
-    this.timer.restart(this.getCurrentActivityDuration(), 0);
+    else{
+      this.activityIterator++;
+
+      if (this.activityIterator >= activitiesSequence.length) {
+        this.activityIterator = 0;
+      }
+      this.resetCurrentActivityDuration();
+    }
   };
   getCurrentActivity = () => {
     return activities[activitiesSequence[this.activityIterator]];
@@ -40,6 +68,8 @@ export class Pomodoro {
   };
 
   tick = () => {
+    this.timeRemaining.setSeconds(this.timeRemaining.getSeconds()-1);
+    this.intervalCallback();
     if (this.timeRemaining <= 0) {
       this.nextActivity();
     }
