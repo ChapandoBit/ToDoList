@@ -14,8 +14,9 @@ export const pomodoroScript = new Script(
 
     document.querySelector("#pomodoro-btn").addEventListener("click", (e) => {
       e.preventDefault();
+      console.log('clicked pomodoro btn');
 
-      if (isPomoWindowActive) {
+      if (!isPomoWindowActive) {
         pomodoroContainer.className = "";
       } else {
         pomodoroContainer.className = "js-invisible";

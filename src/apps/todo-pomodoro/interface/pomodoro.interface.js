@@ -46,7 +46,10 @@ export class Pomodoro {
   };
 
   stringify = () => {
-    return `${this.timeRemaining.getMinutes()}:${this.timeRemaining.getSeconds()}`;
+    const secs = this.timeRemaining.getSeconds();
+    const mins = this.timeRemaining.getMinutes();
+
+    return `${mins < 10 ? `0${mins}`: mins}:${secs < 10 ? `0${secs}`: secs}`;
   };
 
   constructor() {
